@@ -1,6 +1,6 @@
-
 import Vue from 'vue'
 import Router from 'vue-router'
+import Home from '@/components/app/Home.vue';
 import test from '@/components//test/test.vue';
 import netBasic from '@/components/netBasic/netBasic.vue';
 
@@ -9,6 +9,25 @@ Vue.use(Router);
 const router = new Router({
   mode: 'history',
   routes: [
+    /*
+    * 首页
+    * */
+    {
+      path: '/',
+      component: Home,
+    },
+    {
+      path: '',
+      component: Home,
+    },
+    {
+      path: '/index.html',
+      component: Home,
+    },
+    {
+      path: '/home',
+      component: Home,
+    },
     /*
     * Vue基础案例
     * 1、即时搜索
@@ -19,14 +38,28 @@ const router = new Router({
       component: resolve => require(['@/components/netBasic/netBasic'], resolve),
       children: [
         {
-          path: '/',
+          path: '/navigation',
           name: 'navigation',
           component: resolve => require(['@/components/netBasic/navigation'], resolve)
         },
         {
           path: '/netVueBasic',
           name: 'netVueBasic',
-          component: resolve => require(['@/components/netBasic/netVueBasic'], resolve)
+          component: resolve => require(['@/components/netBasic/netVueBasic'], resolve),
+          children: [
+            {
+              path: '/InstantSearch',
+              name: 'InstantSearch',
+              component: resolve => require(['@/components/netBasic/InstantSearch/InstantSearch'], resolve),
+              children: [
+                {
+                  path: '/end',
+                  name: 'end',
+                  component: resolve => require(['@/components/netBasic/InstantSearch/end/end'], resolve)
+                },
+              ]
+            },
+          ]
         },
       ]
     },
@@ -38,6 +71,21 @@ const router = new Router({
       name: 'test',
       component: resolve => require(['@/components/test/test'], resolve),
       children: [
+        {
+          path: '/',
+          name: 'test',
+          component: resolve => require(['@/components/test/test'], resolve)
+        },
+        {
+          path: '/vif',
+          name: 'vif',
+          component: resolve => require(['@/components/test/vif'], resolve)
+        },
+        {
+          path: '/von',
+          name: 'von',
+          component: resolve => require(['@/components/test/von'], resolve)
+        },
         {
           path: '/demo',
           name: 'demo',

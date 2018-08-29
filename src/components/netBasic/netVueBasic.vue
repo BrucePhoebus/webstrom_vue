@@ -1,29 +1,55 @@
 <template>
-  <!--即时搜索-->
-  <div id="net-basic">
-    <form v-cloak>
-      <div class="bar">
-        <input type="text" v-model="searchString" placeholder="请输入你的搜索词..."/>
-      </div>
-
-      <!-- searchString为函数参数 -->
-      <ul>
-        <li v-for="i in articles">
-          <a v-bind:href="i.url">
-            <img v-bind:src="i.image"/>
-            <p>{{i.title}}</p>
-          </a>
+  <div>
+    <div>
+      <h2 class="text-center">{{title}}</h2>
+      <ul class="text-center spacing" style="padding: 0">
+        <li v-for="item in lisks">
+          <a @click="$goRoute(item.route)">{{item.text}}</a>
         </li>
       </ul>
-    </form>
+    </div>
+    <!--即时搜索-->
+    <div id="net-basic">
+      <form v-cloak>
+        <div class="bar">
+          <input type="text" v-model="searchString" placeholder="请输入你的搜索词..."/>
+        </div>
+
+        <!-- searchString为函数参数 -->
+        <ul>
+          <li v-for="i in articles">
+            <a v-bind:href="i.url">
+              <img v-bind:src="i.image"/>
+              <p>{{i.title}}</p>
+            </a>
+          </li>
+        </ul>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "net-basic",
+    name: "netVueBasic",
     data() {
       return {
+        title: '这是netVueBasic页面-netBasic下的即时搜索页面',
+        lisks: [
+          {
+            text: 'netVueBasic',
+            route: '/netBasic/netVueBasic'
+          },
+          {
+            text: 'end',
+            route: '/end'
+          },
+          {
+            text: 'return',
+            route: '/Home'
+          }
+        ],
+
         searchString: "",
         articles: [
           {

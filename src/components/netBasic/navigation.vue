@@ -1,4 +1,5 @@
 <template>
+  <!--导航栏-->
   <div id="navigation">
     <nav :class="active" @click.prevent>
       <a href="#" class="home" @click="makeActive('home')">Home</a>
@@ -13,8 +14,8 @@
 <script>
   export default {
     name: "navigation",
-    data: {
-      return: {
+    data() {
+      return {
         active: "home"
       }
     },

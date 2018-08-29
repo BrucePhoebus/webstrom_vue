@@ -1,17 +1,41 @@
 <template>
-  <div id="netBasic">
-    <netVueBasic></netVueBasic>
+  <div class="netBasic">
+    <h2 class="text-center">{{title}}</h2>
+    <ul class="text-center spacing" style="padding: 0">
+      <li v-for="item in lisks">
+        <a @click="$goRoute(item.route)">{{item.text}}</a>
+      </li>
+    </ul>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import netVueBasic from './netVueBasic'
 
     export default {
       name: "netBasic",
 
+      data() {
+        return {
+          title: '这是netBasic页面-netBasic下第一个页面',
+          lisks: [
+            {
+              text: 'navigation',
+              route: '/netBasic/navigation'
+            },
+            {
+              text: 'netVueBasic',
+              route: '/netBasic/netVueBasic'
+            },
+            {
+              text: 'return',
+              route: '/Home'
+            }
+          ]
+        }
+      },
+
       component: {
-        netVueBasic
       }
     }
 </script>

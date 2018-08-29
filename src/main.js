@@ -6,8 +6,13 @@ import router from './router/index.js'
 
 Vue.config.productionTip = false
 
+// 路由跳转
+Vue.prototype.$goRoute = function (index) {
+  this.$router.push(index)
+};
+
 new Vue({
   el: '#app',
   router,
   render: h => h(App)
-}).$mount('#app');
+})
