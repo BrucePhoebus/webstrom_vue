@@ -6,6 +6,7 @@
           <a @click="$goRoute(item.route)">{{item.text}}</a>
         </li>
       </ul>
+      <router-view></router-view>
     </div>
 </template>
 
@@ -14,11 +15,19 @@
       name: "test",
       data() {
         return {
-          title: '这是v-if页面-test下第一个页面',
+          title: '这是test页面-test文件下第一个页面',
           lisks: [
             {
-              text: 'v-if',
-              route: '/test/vif'
+              text: 'demo',
+              route: '/demo'
+            },
+            {
+              text: 'vif',
+              route: '/vif'
+            },
+            {
+              text: 'von',
+              route: '/von'
             },
             {
               text: 'netBasic',

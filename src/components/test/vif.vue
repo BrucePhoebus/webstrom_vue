@@ -1,5 +1,11 @@
 <template>
-  <div id="vif">
+  <div class="vif">
+    <h2>{{ title }}</h2>
+    <ul>
+      <li v-for="item in lisks"><a @click="a(item.route)">{{item.text}}</a></li>
+    </ul>
+    <router-link :to="'/netBasic'">netBasic</router-link>
+    <router-link :to="{ path: '/netBasic' }">netBasic</router-link>
     <!--<div>
       <div v-if="show" transition="my-transition"></div>
     </div>
@@ -17,26 +23,52 @@
         </li>
       </ul>
     </div>-->
-    <div id="demo">
+    <!--<div id="demo">
       <button @click="show = !show">
         Toggle
       </button>
       <transition name="fade">
         <p v-if="show">hello</p>
       </transition>
-    </div>
+    </div>-->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
   export default {
     name: "vif",
-    data: {
-
+    data: function() {
+      return {
+        title: '这是vif页面-test页面下的vif',
+        lisks: [
+          {
+            text: 'demo',
+            route: '/demo'
+          },
+          {
+            text: 'von',
+            route: '/von'
+          },
+          {
+            text: 'netBasic',
+            route: '/netBasic'
+          },
+          {
+            text: 'return',
+            route: '/Home'
+          }
+        ]
+      }
     },
+    methods: {
+      a: function (index) {
+        this.$router.push(index);
+      }
+    }
   }
   //提供 JavaScript 钩子
-  Vue.transition('expand', {
+ /* Vue.transition('expand', {
     beforeEnter: function (el) {
       el.textContent = 'beforeEnter'
     },
@@ -61,15 +93,15 @@
     leaveCancelled: function (el) {
       // handle cancellation
     }
-  });
-
+  });*/
+/*
   Vue.transition('stagger', {
     stagger: function (index) {
       // 每个过渡项目增加 50ms 延时
       // 但是最大延时限制为 300ms
       return Math.min(300, index * 50)
     }
-  });
+  });*/
 </script>
 
 <style scoped>

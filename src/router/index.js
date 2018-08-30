@@ -38,7 +38,7 @@ const router = new Router({
       component: resolve => require(['@/components/netBasic/netBasic'], resolve),
       children: [
         {
-          path: '/',
+          path: '/netVueBasic',
           name: 'netVueBasic',
           component: resolve => require(['@/components/netBasic/netVueBasic'], resolve),
           children: [
@@ -71,11 +71,6 @@ const router = new Router({
       name: 'test',
       component: resolve => require(['@/components/test/test'], resolve),
       children: [
-        {
-          path: '/',
-          name: 'test',
-          component: resolve => require(['@/components/test/test'], resolve)
-        },
         {
           path: '/vif',
           name: 'vif',

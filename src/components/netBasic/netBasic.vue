@@ -21,15 +21,15 @@
           lisks: [
             {
               text: 'navigation',
-              route: '/netBasic/navigation'
+              route: '/navigation'
             },
             {
               text: 'netVueBasic',
-              route: '/netBasic/netVueBasic'
+              route: '/netVueBasic'
             },
             {
               text: 'InstantSearch',
-              route: '/netBasic/InstantSearch'
+              route: '/InstantSearch'
             },
             {
               text: 'return',

@@ -2,55 +2,43 @@
   <div>
     <div>
       <h2 class="text-center">{{title}}</h2>
-      <ul class="text-center spacing" style="padding: 0">
-        <li v-for="item in lisks">
-          <a @click="$goRoute(item.route)">{{item.text}}</a>
-        </li>
-      </ul>
     </div>
     <!--即时搜索-->
     <div id="net-basic">
       <form v-cloak>
-        <div class="bar">
-          <input type="text" v-model="searchString" placeholder="请输入你的搜索词..."/>
-        </div>
+        <search></search>
 
         <!-- searchString为函数参数 -->
         <ul>
-          <li v-for="i in articles">
-            <a v-bind:href="i.url">
-              <img v-bind:src="i.image"/>
-              <p>{{i.title}}</p>
+          <li v-for="item in articles">
+            <a v-bind:href="item.url">
+              <img v-bind:src="item.image"/>
+              <p>{{articleFilter}}</p>
             </a>
           </li>
         </ul>
       </form>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+  import Vue from 'vue'
+
+  Vue.component('search', {
+    props: ['searchString'],
+    template: '<div class="bar">\n' +
+      '          <input type="text" v-model="searchString" placeholder="请输入你的搜索词..."/>\n' +
+      '        </div>'
+  });
+
   export default {
     name: "netVueBasic",
     data() {
       return {
         title: '这是netVueBasic页面-netBasic下的即时搜索页面',
-        lisks: [
-          {
-            text: 'netVueBasic',
-            route: '/netBasic'
-          },
-          {
-            text: 'InstantSearch',
-            route: '/netBasic/netVueBasic/InstantSearch'
-          },
-          {
-            text: 'return',
-            route: '/Home'
-          }
-        ],
-
-        searchString: "",
+        searchString: '',
         articles: [
           {
             "title": "What You Need To Know About CSS Variables",
@@ -70,31 +58,52 @@
         ],
       }
     },
+
+    methods: {},
     computed: {
-      articles: function () {
-        return this.articles.filter(function (article, searchString) {
-          // console.log(value);
-          // console.log(searchString);
-          var result = [];
+      articleFilter: function () {
+        let value = search.searchString;
+        var result = [];
 
-          if (!searchString) {
-            return value;
+        if (!value) {
+          return value;
+        }
+        searchString = value.trim().toLowerCase();
+        // filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+        result = this.articles.filter(function (item) {
+          // 如果搜索词被包含,则返回匹配的内容
+          if (item.title.toLowerCase().indexOf(value) !== -1) {
+            return item;
           }
-          searchString = searchString.trim().toLowerCase();
-
-          // filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
-          result = value.filter(function (item) {
-            // 如果搜索词被包含,则返回匹配的内容
-            if (item.title.toLowerCase().indexOf(searchString) !== -1) {
-              return item;
-            }
-          });
-
-          return result;
         });
+
+        return result;
       }
+    },
+    components: {
+      search
     }
+  };
+
+
+  /*Vue.filter('articleFilter', function (title, value) {
+  var result = [];
+
+  if (!value) {
+    return;
   }
+  value = value.trim().toLowerCase();
+
+  // filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+  result = this.articles.filter(function (item) {
+    // 如果搜索词被包含,则返回匹配的内容
+    if (item.title.toLowerCase().indexOf(value) !== -1) {
+      return item;
+    }
+  });
+
+  return result;
+})*/
 </script>
 
 <style scoped>
@@ -111,15 +120,6 @@
     font: 15px/1.3 'Open Sans', sans-serif;
     color: #5e5b64;
     text-align: center;
-  }
-
-  a, a:visited {
-    outline: none;
-    color: #389dc1;
-  }
-
-  a:hover {
-    text-decoration: none;
   }
 
   section, footer, header, aside, nav {

@@ -7,6 +7,7 @@
   </div>
 </template>
 <script>
+  import Vue from 'vue'
   export default {
     name: 'app',
     data: function () {
@@ -21,11 +22,18 @@
             route: '/netBasic'
           },
           {
+            text: 'navigation',
+            route: '/navigation'
+          },
+          {
             text: 'test',
             route: '/test'
           }
         ]
       }
+    },
+    methods:{
+
     },
     components: {}
   }

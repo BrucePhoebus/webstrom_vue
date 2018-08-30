@@ -1,5 +1,6 @@
 <template>
   <div id="vfor">
+    demo
     <ul id="for-list" class="wjjtest">
       <li v-for="obj in people">
         {{ obj }}
@@ -23,59 +24,61 @@
   import Vue from 'vue';
 
   export default {
-    name: 'vfor',
-    data: {
-      b: [
-        {message: 'haha'},
-        {message: 'hehe'}
-      ],
-      parentMessage: 'Parent',
-      folders: [
-        {
-          name: 'folder1',
-          children: [{
-            name: 'folder1 - folder1',
+    name: 'demo',
+    data: function () {
+      return {
+        b: [
+          {message: 'haha'},
+          {message: 'hehe'}
+        ],
+        parentMessage: 'Parent',
+        folders: [
+          {
+            name: 'folder1',
             children: [{
-              name: 'folder1 - folder1 - folder1'
-            }]
-          }, {
-            name: 'folder1 - folder2',
-            children: [{
-              name: 'folder1 - folder2 - folder1'
+              name: 'folder1 - folder1',
+              children: [{
+                name: 'folder1 - folder1 - folder1'
+              }]
             }, {
-              name: 'folder1 - folder2 - folder2'
+              name: 'folder1 - folder2',
+              children: [{
+                name: 'folder1 - folder2 - folder1'
+              }, {
+                name: 'folder1 - folder2 - folder2'
+              }]
             }]
-          }]
-        },
-        {
-          name: 'folder 2',
-          children: [{
-            name: 'folder2 - folder1',
+          },
+          {
+            name: 'folder 2',
             children: [{
-              name: 'folder2 - folder1 - folder1'
+              name: 'folder2 - folder1',
+              children: [{
+                name: 'folder2 - folder1 - folder1'
+              }]
+            }, {
+              name: 'folder2 - folder2',
+              children: [{
+                name: 'folder2-content1'
+              }]
             }]
-          }, {
-            name: 'folder2 - folder2',
+          },
+          {
+            name: 'folder 3',
             children: [{
-              name: 'folder2-content1'
+              name: 'folder3 - folder1',
+              children: [{
+                name: 'folder3 - folder1 - folder1'
+              }]
+            }, {
+              name: 'folder3 - folder2',
+              children: [{
+                name: 'folder3-content1'
+              }]
             }]
-          }]
-        },
-        {
-          name: 'folder 3',
-          children: [{
-            name: 'folder3 - folder1',
-            children: [{
-              name: 'folder3 - folder1 - folder1'
-            }]
-          }, {
-            name: 'folder3 - folder2',
-            children: [{
-              name: 'folder3-content1'
-            }]
-          }]
-        }
-      ]
+          }
+        ]
+      }
     }
   }
 </script>

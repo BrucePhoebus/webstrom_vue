@@ -8,6 +8,8 @@
       <a href="#" class="contact" @click="makeActive('contact')">Contact</a>
     </nav>
     <p>You chose <b>{{active}}</b></p>
+
+    <router-view></router-view>
   </div>
 </template>
 

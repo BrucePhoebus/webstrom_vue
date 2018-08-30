@@ -17,14 +17,6 @@
           title: '这是InstantSearch页面-netVueBasic下的即时搜索页面',
           lisks: [
             {
-              text: 'InstantSearch',
-              route: '/netBasic/netVueBasic/InstantSearch'
-            },
-            {
-              text: 'end',
-              route: '/netBasic/end'
-            },
-            {
               text: 'return',
               route: '/Home'
             }
