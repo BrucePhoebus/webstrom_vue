@@ -28,6 +28,10 @@
               route: '/netBasic/netVueBasic'
             },
             {
+              text: 'InstantSearch',
+              route: '/netBasic/InstantSearch'
+            },
+            {
               text: 'return',
               route: '/Home'
             }

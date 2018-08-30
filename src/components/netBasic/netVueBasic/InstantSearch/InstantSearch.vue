@@ -18,7 +18,7 @@
           lisks: [
             {
               text: 'InstantSearch',
-              route: '/netBasic/InstantSearch'
+              route: '/netBasic/netVueBasic/InstantSearch'
             },
             {
               text: 'end',

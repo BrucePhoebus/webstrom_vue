@@ -38,11 +38,11 @@
         lisks: [
           {
             text: 'netVueBasic',
-            route: '/netBasic/netVueBasic'
+            route: '/netBasic'
           },
           {
-            text: 'end',
-            route: '/end'
+            text: 'InstantSearch',
+            route: '/netBasic/netVueBasic/InstantSearch'
           },
           {
             text: 'return',
