@@ -38,12 +38,12 @@ const router = new Router({
       component: resolve => require(['@/components/netBasic/netBasic'], resolve),
       children: [
         {
-          path: '/netVueBasic',
+          path: '/',
           name: 'netVueBasic',
           component: resolve => require(['@/components/netBasic/netVueBasic'], resolve),
           children: [
             {
-              path: '/',
+              path: '/InstantSearch',
               name: 'InstantSearch',
               component: resolve => require(['@/components/netBasic/netVueBasic/InstantSearch/InstantSearch'], resolve),
               children: [

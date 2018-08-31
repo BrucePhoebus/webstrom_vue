@@ -6,15 +6,19 @@
     <!--即时搜索-->
     <div id="net-basic">
       <form v-cloak>
-        <search></search>
+        <div class="bar">
+          <input type="text" v-model="searchString" @keyup.enter="articleFilter(searchString)" placeholder="请输入你的搜索词..."/>
+        </div>
 
         <!-- searchString为函数参数 -->
         <ul>
           <li v-for="item in articles">
-            <a v-bind:href="item.url">
-              <img v-bind:src="item.image"/>
-              <p>{{articleFilter}}</p>
-            </a>
+            <span v-show="item.isTrue">
+              <a v-bind:href="item.url">
+                <img v-bind:src="item.image"/>
+                <p>{{item.title}}</p>
+              </a>
+            </span>
           </li>
         </ul>
       </form>
@@ -24,14 +28,6 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-
-  Vue.component('search', {
-    props: ['searchString'],
-    template: '<div class="bar">\n' +
-      '          <input type="text" v-model="searchString" placeholder="请输入你的搜索词..."/>\n' +
-      '        </div>'
-  });
 
   export default {
     name: "netVueBasic",
@@ -39,50 +35,46 @@
       return {
         title: '这是netVueBasic页面-netBasic下的即时搜索页面',
         searchString: '',
+        props: ['searchString'],
         articles: [
           {
-            "title": "What You Need To Know About CSS Variables",
-            "url": "www.baidu.com/",
-            "image": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513702065552&di=31cc963325776654684e2a05a7e2c61c&imgtype=0&src=http%3A%2F%2Fimg.taopic.com%2Fuploads%2Fallimg%2F120727%2F201995-120HG1030762.jpg"
+            title: "What You Need To Know About CSS Variables",
+            url: "www.baidu.com/",
+            isTrue: true,
+            image: "../../../static/netVueBasic/images/demo01.jpg"
           },
           {
-            "title": "Freebie: 4 Great Looking Pricing Tables",
-            "url": "www.google.com/",
-            "image": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513702065552&di=06b72962d3319bdb0ca14d0ded4f51ac&imgtype=0&src=http%3A%2F%2Fimg07.tooopen.com%2Fimages%2F20170316%2Ftooopen_sy_201956178977.jpg"
+            title: "Freebie: 4 Great Looking Pricing Tables",
+            url: "www.google.com/",
+            isTrue: true,
+            image: "../../../static/netVueBasic/images/demo02.jpg"
           },
           {
-            "title": "20 Interesting JavaScript and CSS Libraries for February 2016",
-            "url": "www.sougou.com/",
-            "image": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513702065552&di=d2fb75d53377e893090d620c7989b136&imgtype=0&src=http%3A%2F%2Fdl.bizhi.sogou.com%2Fimages%2F2012%2F01%2F19%2F174522.jpg"
+            title: "20 Interesting JavaScript and CSS Libraries for February 2016",
+            url: "www.sougou.com/",
+            isTrue: true,
+            image: "../../../static/netVueBasic/images/demo.jpg"
           }
         ],
       }
     },
 
-    methods: {},
-    computed: {
-      articleFilter: function () {
-        let value = search.searchString;
-        var result = [];
-
+    methods: {
+      articleFilter: function (value) {
         if (!value) {
           return value;
         }
-        searchString = value.trim().toLowerCase();
+        value = value.trim().toLowerCase();
         // filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
-        result = this.articles.filter(function (item) {
+        this.articles.filter(function (item) {
           // 如果搜索词被包含,则返回匹配的内容
-          if (item.title.toLowerCase().indexOf(value) !== -1) {
-            return item;
+          if (item.title.toLowerCase().indexOf(value) === -1) {
+            item.isTrue = false;
           }
         });
 
-        return result;
       }
     },
-    components: {
-      search
-    }
   };
 
 

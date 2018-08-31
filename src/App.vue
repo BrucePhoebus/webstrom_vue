@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <ul>
+    <!--<ul>
       <li v-for="item in links"><a @click="$goRoute(item.route)">{{item.text}}</a></li>
-    </ul>
+    </ul>-->
     <router-view></router-view>
   </div>
 </template>
