@@ -7,19 +7,28 @@
     <div id="net-basic">
       <form v-cloak>
         <div class="bar">
-          <input type="text" v-model="searchString" @keyup.enter="articleFilter(searchString)" placeholder="请输入你的搜索词..."/>
+          <input type="text" v-model="searchString" placeholder="请输入你的搜索词..."/>
         </div>
 
         <!-- searchString为函数参数 -->
         <ul>
-          <li v-for="item in articles">
-            <span v-show="item.isTrue">
-              <a v-bind:href="item.url">
-                <img v-bind:src="item.image"/>
-                <p>{{item.title}}</p>
-              </a>
-            </span>
-          </li>
+            <li v-for="item in articles">
+              <div v-show="item.isTrue">
+                <a target="_blank" v-bind:href="item.url">
+                  <img v-bind:src="item.image"/>
+                  <p>{{item.title}}</p>
+                </a>
+              </div>
+            </li>
+          <!--
+            <li v-for="item in result">
+              <div v-show="item.isTrue">
+                <a target="_blank" v-bind:href="item.url">
+                  <img v-bind:src="item.image"/>
+                  <p>{{item.title}}</p>
+                </a>
+              </div>
+            </li>-->
         </ul>
       </form>
     </div>
@@ -35,23 +44,24 @@
       return {
         title: '这是netVueBasic页面-netBasic下的即时搜索页面',
         searchString: '',
-        props: ['searchString'],
+        result: [],
+        count: 0,
         articles: [
           {
-            title: "What You Need To Know About CSS Variables",
-            url: "www.baidu.com/",
+            title: "What You Need To Know About CSS Variables --abc",
+            url: "https://www.baidu.com/",
             isTrue: true,
             image: "../../../static/netVueBasic/images/demo01.jpg"
           },
           {
-            title: "Freebie: 4 Great Looking Pricing Tables",
-            url: "www.google.com/",
+            title: "Freebie: 4 Great Looking Pricing Tables--abcd",
+            url: "https://www.google.com/",
             isTrue: true,
             image: "../../../static/netVueBasic/images/demo02.jpg"
           },
           {
-            title: "20 Interesting JavaScript and CSS Libraries for February 2016",
-            url: "www.sougou.com/",
+            title: "20 Interesting JavaScript and CSS Libraries for February 2016--abcd",
+            url: "https://www.sougou.com/",
             isTrue: true,
             image: "../../../static/netVueBasic/images/demo.jpg"
           }
@@ -60,21 +70,62 @@
     },
 
     methods: {
-      articleFilter: function (value) {
-        if (!value) {
-          return value;
-        }
+      articleFilter: function () {
+        let value = this.searchString;
         value = value.trim().toLowerCase();
+        let _count = this.count;
         // filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
         this.articles.filter(function (item) {
           // 如果搜索词被包含,则返回匹配的内容
           if (item.title.toLowerCase().indexOf(value) === -1) {
             item.isTrue = false;
+            _count++;
           }
         });
+        this.count = _count;
+      },
+      /*articleFilter: function (value) {
+        let _result = this.result;
+        value = value.trim().toLowerCase();
+        // filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素
+        _result = this.articles.filter(function (item) {
+          // 如果搜索词被包含,则返回匹配的内容
+          if (item.title.toLowerCase().indexOf(value) !== -1) {
+            return = item;
+          }
+        });
+        if (_result)
+          console.log(_result[0].title);
 
-      }
+        return _result;
+
+      },*/
+      /*GoTo: function (url) {
+        window.location.href = url;
+      }*/
     },
+
+    watch: {
+      searchString: function (newValue, oldValue) {
+        if(newValue.length<oldValue.length) {
+          this.count = 0;
+          for (var i in this.articles) {
+            this.articles[i].isTrue = true;
+          }
+          this.articleFilter();
+        }
+        if(!this.searchString) {
+          for (var i in this.articles) {
+            this.articles[i].isTrue = true;
+          }
+          this.count = 0;
+          return 0;
+        } else {
+          this.articleFilter();
+        }
+      }
+
+    }
   };
 
 
